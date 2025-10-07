@@ -14,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# REFINED: Centralized custom CSS for better maintainability.
+#Centralized custom CSS for better maintainability.
 st.markdown("""
 <style>
     /* General styling */
@@ -30,8 +30,6 @@ st.markdown("""
     .divider { border-top: 2px solid #ffb703; margin-top: 10px; margin-bottom: 20px; }
 </style>
 """, unsafe_allow_html=True)
-
-
 
 # ----------------------------
 # API & Session Management
@@ -159,7 +157,7 @@ def get_scorecard(match_id):
         st.error(f"An unexpected error occurred: {e}")
         return None
 
-# REFINED: This function is good. No major changes needed.
+# This function is for Parse Scorecard
 def parse_scorecard(data, match_id):
     """Parses scorecard JSON into four distinct DataFrames."""
     scorecard = data.get("scorecard", [])
@@ -220,6 +218,13 @@ def get_player_stats(player_id, stat_type):
 # ----------------------------
 # Streamlit Pages
 # ----------------------------
+def home_page():
+    st.title("🏠 Cricket Data Analytics Dashboard")
+    st.markdown("""
+    ## 🏏 Overview
+    Welcome to the **Cricket Data Analytics Dashboard** — an interactive platform to explore detailed insights from international cricket matches.
+    Allowing users to explore live match data, player stats, and cricket analytics. It also integrates with PostgreSQL for structured storage and includes SQL practice and CRUD management features.
+                """)
 def live_match_page():
     """UI for displaying live match scores."""
     st.title("🏏 Live Match Dashboard")
@@ -650,8 +655,9 @@ def main():
     """Main function to run the Streamlit app."""
     st.sidebar.title("MENU")
     
-    # REFINED: Page names are more user-friendly.
+    # Page names
     page_options = {
+        "Home": home_page,
         "Live Match Scores": live_match_page,
         "Player Statistics": player_stats_page,
         "SQL Practice": sql_practice_page,
@@ -665,4 +671,5 @@ def main():
     page_function()
 
 if __name__ == "__main__":
+
     main()
